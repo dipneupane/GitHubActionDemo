@@ -1,0 +1,29 @@
+name: GitHubAction Demo Project
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-and-deploy:    
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.102'
+
+    - name: Build with dotnet
+      run: dotnet build GitHubActionDemo/GithubAction.csproj --configuration Release
+
+    - name: dotnet publish
+      run: dotnet publish -c Release GitHubActionDemo/GithubAction.csproj -o ${{env.DOTNET_ROOT}}/Wefigo.Web
+        
+    - name: Deploy to IIS
+      run: |
+        iisreset /stop
+        Copy-Item ${{env.DOTNET_ROOT}}/GitHubActionDemo/* C:\inetpub\wwwroot\GitHubActionDemo -Recurse -Force
+        iisreset /start
