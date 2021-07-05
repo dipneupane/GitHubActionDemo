@@ -20,7 +20,7 @@ jobs:
       run: dotnet build GithubAction.csproj --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish -c Release GithubAction.csproj -o ${{env.DOTNET_ROOT}}/Wefigo.Web
+      run: dotnet publish -c Release GithubAction.csproj -o ${{env.DOTNET_ROOT}}/GitHubActionDemo
         
     - name: Deploy to IIS
       run: |
