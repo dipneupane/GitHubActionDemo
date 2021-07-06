@@ -17,10 +17,10 @@ jobs:
         dotnet-version: '3.1.404'
 
     - name: Build with dotnet
-      run: dotnet build GithubAction.csproj --configuration Release
+      run: dotnet build GitHubAction.csproj --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish -c Release GithubAction.csproj -o ${{env.DOTNET_ROOT}}/GitHubActionDemo
+      run: dotnet publish -c Release GitHubAction.csproj -o ${{env.DOTNET_ROOT}}/GitHubActionDemo
         
     - name: Deploy to IIS
       run: |
